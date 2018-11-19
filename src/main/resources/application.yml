@@ -1,0 +1,12 @@
+server:
+  port: 8089
+
+spring:
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/mysql?pinGlobalTxToPhysicalConnection=true
+    username: root
+    password: abcd1234
+  jpa:
+    database: mysql
+    generateDdl: false
+    showSql: true
