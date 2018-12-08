@@ -13,4 +13,7 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
     @Query(value = "SELECT * FROM t_menus ORDER BY RAND() limit ?1", nativeQuery = true)
     List<Menu> findRandomMenus(Integer limit);
+
+    @Query(value = "SELECT max(id)+1 as menuId FROM t_menus", nativeQuery = true)
+    Integer newMenuId();
 }
