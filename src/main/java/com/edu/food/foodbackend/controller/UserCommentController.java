@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +48,8 @@ public class UserCommentController {
     public void saveComment(
             @ApiParam(value = "account", required = true) @PathVariable String account,
             @ApiParam(value = "menuId", required = true) @PathVariable Integer menuId,
-            @ApiParam(value = "comment", required = true) @RequestBody String comment) {
-        userCommentRepository.saveComment(menuId, account, comment, new Date());
+            @ApiParam(value = "comment", required = true) @RequestBody String comment) throws UnsupportedEncodingException {
+        String chineseComment = URLDecoder.decode(comment, "utf-8");
+        userCommentRepository.saveComment(menuId, account, chineseComment, new Date());
     }
 }
