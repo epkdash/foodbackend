@@ -28,4 +28,15 @@ public class UserController {
             @ApiParam(value = "user", required = true) @RequestBody User user) {
         return userRepository.save(user);
     }
+
+    @RequestMapping(value = "/user", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public User modifyUser(
+            @ApiParam(value = "user", required = true) @RequestBody User user) {
+        User oldUser = userRepository.findByAccount(user.getAccount());
+        oldUser.setGender(user.getGender());
+        oldUser.setUsername(user.getUsername());
+        oldUser.setIntro(user.getIntro());
+        return userRepository.save(oldUser);
+    }
 }
